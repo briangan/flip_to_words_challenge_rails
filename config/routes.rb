@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "letters_2_flip#index"
+  root "letters_to_flip#index"
 end

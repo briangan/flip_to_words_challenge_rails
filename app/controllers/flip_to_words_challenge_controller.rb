@@ -1,5 +1,5 @@
-class Flip2WordsChallengeController < ApplicationController
-  include Flip2WordsChallengeHelper
+class FlipToWordsChallengeController < ApplicationController
+  include FlipToWordsChallengeHelper
 
   def verify
     @letters_to_flip = read_letters_to_flip_from_file

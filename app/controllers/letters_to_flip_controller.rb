@@ -1,10 +1,10 @@
-class Letters2FlipController < ApplicationController
+class LettersToFlipController < ApplicationController
 
   before_action :authenticate_user!
   
   def index
     @letters_to_flip = read_letters_to_flip_from_file
-    render template: 'letters_2_flip/index'
+    render template: 'letters_to_flip/index'
   end
 
   def update
@@ -30,7 +30,7 @@ class Letters2FlipController < ApplicationController
   end
 
   def read_letters_to_flip_from_file
-    file_path = Rails.root.join('storage', 'letters_2_flip.csv')
+    file_path = Rails.root.join('storage', 'letters_to_flip.csv')
     if File.exist?(file_path)
       File.read(file_path).split("\n").map(&:to_i)
     else
@@ -39,7 +39,7 @@ class Letters2FlipController < ApplicationController
   end
 
   def write_letters_to_flip_to_file(letters)
-    file_path = Rails.root.join('storage', 'letters_2_flip.csv')
+    file_path = Rails.root.join('storage', 'letters_to_flip.csv')
     File.open(file_path, 'w') do |file|
       file.puts(letters.join("\n"))
     end
