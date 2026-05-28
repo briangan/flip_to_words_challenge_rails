@@ -13,13 +13,26 @@
  *= require_tree .
  *= require_self
  */
-.red {
+ .letter-position-checkbox {
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+}
+.f2w-1 {
   background-color: red;
 }
-.green {
+.f2w-2 {
   background-color: green;
 }
-.blue {
+.f2w-3 {
+  background-color: yellow;
+}
+.f2w-4 {
   background-color: blue;
 }
-
+.f2w-5 {
+  background-color: rgb(110, 50, 187);
+}
+.f2w-6 {
+  background-color: #4a2500;
+}
