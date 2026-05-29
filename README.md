@@ -1,6 +1,6 @@
 # README
 
-This is the development/test Rails app that implements the Flip2WordsChallenge, 
+This is the development/test Rails app that implements the FlipToWordsChallenge, 
 a UI challenge with intentionally complicate codes, to challenge the user to 
 flip the correct dots in the container to display the ASCII form of the letters.
 The main goal is to enforce enough manual human interactions so that scrapers and bots 
