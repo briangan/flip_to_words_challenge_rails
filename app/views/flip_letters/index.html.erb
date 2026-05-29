@@ -1,0 +1,6 @@
+<% if flash[:alert].present? %>
+  <h1><%= flash[:alert] %></h1>
+<% else %>
+  <% content_for :title, "Letters to Flip Manager" %>
+  <%= render 'manager' %>
+<% end %>

@@ -1,0 +1,12 @@
+<% # Required locals:
+  # flip_letters - <Hash of letters to positions, e.g. { "A" => [true, false, true, ...], "B" => [false, true, false, ...] }>
+-%>
+<%= turbo_frame_tag "flip_letters_list" do %>
+  <ul id="flip_letters_list" class="list-group">
+    <% flip_letters.each do |letter, positions| %>
+      <li class="list-group-item text-center">
+        <%= link_to letter, flip_letter_path(letter: letter), data: { turbo_stream: true } %>
+      </li>
+    <% end %>
+  </ul>
+<% end # turbo_frame_tag flip_letters_list %>

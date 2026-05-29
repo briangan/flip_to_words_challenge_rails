@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "flip_letters_list" do %>
+  <%= render partial: 'list', locals: { flip_letters: @flip_letters } %>
+<% end %>
+
+<%= turbo_stream.replace "letter_form" do %>
+  <%= render partial: 'flip_letters/form', locals: { letter: @letter, positions: [] } %>
+<% end %>

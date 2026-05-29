@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
+  match '/flip_letters/:letter', to: 'flip_letters#show', via: [:get], as: 'flip_letter'
+  match '/flip_letters/:letter', to: 'flip_letters#destroy', via: [:delete], as: 'delete_flip_letter'
+  match '/flip_letters', to: 'flip_letters#update', via: [:put, :patch, :post], as: 'update_flip_letter'
+
   # Defines the root path route ("/")
-  root "letters_to_flip#index"
+  root "flip_letters#index"
 end
