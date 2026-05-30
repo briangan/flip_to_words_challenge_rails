@@ -3,6 +3,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap.min"
 import { resetPositionCheckboxes } from "utils"
+import { toggleMultivalueCheckbox } from "utils"
 
 // Make utilities available globally if needed
 window.resetPositionCheckboxes = resetPositionCheckboxes;
+window.toggleMultivalueCheckbox = toggleMultivalueCheckbox;

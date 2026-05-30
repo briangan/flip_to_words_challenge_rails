@@ -3,23 +3,31 @@
   # - positions: an array of booleans indicating which positions are chosen for the letter
   positions = [] unless defined?(positions) && positions.is_a?(Array)
   letter ||= ''
+  mulivalues = FlipLetter::POSITION_VALUES.map{ |pos| pos.to_s }.join(",")
 -%>
 <%= form_tag update_flip_letter_path, method: :post, remote: true, id: "letter_form", name: "letter_form" do %>
   <div>
-    <label for="letter" class="form-label">Letter to Flip:</label>
-    <%= text_field_tag :letter, params[:letter], id: "letter_field", style: "text-transform: uppercase; width: 1.2em; font-size: 16pt;", maxlength: 1, required: true, onchange: "resetPositionCheckboxes('#letter_form')" %>
+    <label for="letter" class="form-label fw-bold" style="line-height: 2em; margin-right: 0.2em;">Letter to Flip: </label>
+    <%= text_field_tag :letter, params[:letter], id: "letter_field", style: "text-transform: uppercase; width: 1.2em; font-size: 14pt;", maxlength: 1, required: true, onchange: "resetPositionCheckboxes('#letter_form')" %>
   </div>
-  <div class="card mt-3">
-    <div class="card-body">
-      <table>
+  <div>
+    <label class="form-label" style="line-height: 2em;">Checkbox meanings: </label>
+    <% FlipLetter::POSITION_VALUE_MEANINGS.each do |value, meaning| %>
+      <%= check_box_tag "positions[#{value}]", value, true, { class: "letter-position-checkbox", title: meaning, data: { 'bs-toggle': 'tooltip', 'bs-title': meaning } } %>
+    <% end %>
+  </div>
+  <div class="card">
+    <div class="card-body text-center">
+      <table style="margin: 0 auto;">
         <tbody>
           <% 1.upto(FlipLetter::ROWS_FOR_LETTER) do |row| %>
             <tr>
               <% 1.upto(FlipLetter::COLUMNS_FOR_LETTER) do |col| 
                 pos = (row - 1) * FlipLetter::COLUMNS_FOR_LETTER + (col - 1)
+                init_color = positions[pos] ? "f2w-#{positions[pos] }" : ""
               %>
                 <td class="letter-position-cell">
-                  <%= check_box_tag "positions[#{pos}]", true, positions[pos], class: "letter-position-checkbox f2w-#{pos}" %>
+                  <%= check_box_tag "positions[#{pos}]", (positions[pos] || 0).to_s, mulivalues.include?(positions[pos].to_s), { class: "letter-position-checkbox", data: { 'bs-toggle': 'tooltip', 'bs-title': 'Empty, Must, Optional', multiple_values: mulivalues }, onclick: "toggleMultivalueCheckbox(event)" } %>
                 </td>
               <% end %>
             </tr>

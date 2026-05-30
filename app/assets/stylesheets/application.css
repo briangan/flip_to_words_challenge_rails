@@ -15,24 +15,39 @@
  */
  .letter-position-checkbox {
   display: inline-block;
-  width: 3em;
-  height: 3em;
+  vertical-align: middle;
+  width: 2em;
+  height: 2em;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #f0f0f0;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2), inset -1px -1px 2px rgba(255, 255, 255, 0.7);
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
 }
-.f2w-1 {
-  background-color: red;
+
+.letter-position-checkbox:checked[value="0"] {
+  background-color: #f0f0f0;
 }
-.f2w-2 {
-  background-color: green;
-}
-.f2w-3 {
-  background-color: yellow;
-}
-.f2w-4 {
+
+.f2w-1:checked, .letter-position-checkbox:checked[value="1"] {
   background-color: blue;
 }
-.f2w-5 {
-  background-color: rgb(110, 50, 187);
+.f2w-2:checked, .letter-position-checkbox:checked[value="2"] {
+  background-color: green;
 }
-.f2w-6 {
-  background-color: #4a2500;
+.f2w-3:checked, .letter-position-checkbox:checked[value="3"] {
+  background-color: yellow;
+}
+.f2w-4:checked, .letter-position-checkbox:checked[value="4"] {
+    background-color: red;
+}
+.f2w-5:checked, .letter-position-checkbox:checked[value="5"] {
+  background-color: rgb(139, 84, 211);
+}
+.f2w-6:checked, .letter-position-checkbox:checked[value="6"] {
+  background-color: #af7032;
 }
