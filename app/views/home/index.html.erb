@@ -7,13 +7,19 @@
 <div class="container mt-4">
   <h1>Welcome to the Flip2Words Challenge!</h1>
   <p>This is the development/test Rails app that implements the FlipToWordsChallenge, 
-a UI challenge with intentional complicate codes, to challenge the user to 
-flip the correct dots in the container to display the ASCII form of the letters.
-Instead using Captcha service, the main goal is to enforce enough manual human interactions, 
-so that scrapers and bots cannot pass easily; and underneath HTML, CSS, and 
-Javascript codes are renamed and shuffled, so AI agents cannot easily understand and 
-think of breaking techniques.</p>
-  
+    a UI challenge to enforce human interactions of flipping the correct dots to display 
+    the ASCII form of the letters.  
+  </p>
+  <p>
+    Similar to Captcha services, main goals are:
+    <ul>
+      <li>avoid the scrapers and bots to steal the content for search engine to display summary instead of pointing the users to the original sites</li>
+      <li>the web was born with genuine human-created content</li>
+      <li>underneath HTML, CSS, and Javascript codes are renamed and shuffled, so AI agents cannot easily understand and 
+        think of breaking techniques.
+      </li>
+    </ul>
+  </p>
   <%= render partial: 'flip_to_words_challenge_canvas' %>
 </div>
 
