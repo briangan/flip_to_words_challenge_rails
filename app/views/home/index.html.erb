@@ -1,0 +1,19 @@
+<% if allowed_to_manage_flip_letters? %>
+  <div class="float-end mt-2">
+    <%= link_to "Manage Flip Letters", flip_letters_path, class: "btn btn-primary" %>
+  </div>
+  <div class="clearfix"></div>
+<% end %>
+<div class="container mt-4">
+  <h1>Welcome to the Flip2Words Challenge!</h1>
+  <p>This is the development/test Rails app that implements the FlipToWordsChallenge, 
+a UI challenge with intentional complicate codes, to challenge the user to 
+flip the correct dots in the container to display the ASCII form of the letters.
+Instead using Captcha service, the main goal is to enforce enough manual human interactions, 
+so that scrapers and bots cannot pass easily; and underneath HTML, CSS, and 
+Javascript codes are renamed and shuffled, so AI agents cannot easily understand and 
+think of breaking techniques.</p>
+  
+  <%= render partial: 'flip_to_words_challenge_canvas' %>
+</div>
+

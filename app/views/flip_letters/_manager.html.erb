@@ -7,4 +7,14 @@
   <div class="col-md-auto float-start p-3">
     <%= render partial: 'form', locals: { letter: @letter || params[:letter], positions: @positions || params[:positions] } %>
   </div>
+  <div class="col-md-auto float-start pt-5">
+    <div class="border-bottom border-secondary mb-2">
+      <label class="form-label">Checkbox meanings: </label>
+    </div>
+    <% FlipLetter::POSITION_VALUE_MEANINGS.each do |value, meaning| %>
+      <div class="mb-2 vertical-center">
+        <%= check_box_tag "positions[#{value}]", value, true, { class: "letter-position-checkbox", title: meaning, data: { 'bs-toggle': 'tooltip', 'bs-title': meaning } } %> <%= meaning %>
+      </div>
+    <% end %>
+  </div>
 </div>

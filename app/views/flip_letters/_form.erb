@@ -10,12 +10,6 @@
     <label for="letter" class="form-label fw-bold" style="line-height: 2em; margin-right: 0.2em;">Letter to Flip: </label>
     <%= text_field_tag :letter, params[:letter], id: "letter_field", style: "text-transform: uppercase; width: 1.2em; font-size: 14pt;", maxlength: 1, required: true, onchange: "resetPositionCheckboxes('#letter_form')" %>
   </div>
-  <div>
-    <label class="form-label" style="line-height: 2em;">Checkbox meanings: </label>
-    <% FlipLetter::POSITION_VALUE_MEANINGS.each do |value, meaning| %>
-      <%= check_box_tag "positions[#{value}]", value, true, { class: "letter-position-checkbox", title: meaning, data: { 'bs-toggle': 'tooltip', 'bs-title': meaning } } %>
-    <% end %>
-  </div>
   <div class="card">
     <div class="card-body text-center">
       <table style="margin: 0 auto;">
