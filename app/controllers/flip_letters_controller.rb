@@ -30,7 +30,7 @@ class FlipLettersController < ApplicationController
   # Update the local file to define which letters and which positions should be flipped for the challenge.
   # Expects params: { letter: 'C', positions: [0, 2, 7] }
   def update
-    p = params.permit(:letter, positions: {})
+    p = params.permit!.to_h
     @letter = p[:letter]
     @positions = p[:positions] || {}
     map = FlipLetterMap.load_from_file
