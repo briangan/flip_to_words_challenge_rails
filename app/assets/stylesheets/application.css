@@ -33,7 +33,7 @@
   background-color: #f0f0f0;
 }
 
-.f2w-1:checked, .letter-position-checkbox:checked[value="1"] {
+.f2w-1:checked, .letter-position-checkbox:checked[value="1"], .letter-position-checkbox:checked[value="true"]  {
   background-color: blue;
 }
 .f2w-2:checked, .letter-position-checkbox:checked[value="2"] {

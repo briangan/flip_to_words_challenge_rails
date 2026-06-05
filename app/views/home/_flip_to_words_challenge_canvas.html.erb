@@ -7,5 +7,50 @@
 =end
 -%>
 <div id="flip-2-words-challenge" class="challenge-container">
-
+  <h3>Flip the checkboxes to show the ASCII form of the letters, to verify human interaction.</h3>
+  <%= form_tag verify_flip_to_words_challenge_path, method: :post, data: { turbo: false } do %>
+    <div class="row">
+      <% 
+      flip_letters = generate_random_combo_of_flip_letters
+      col_w = (12 / flip_letters.size.to_f).ceil
+      flip_letters.each do |flip_letter| 
+        index = 0
+      %>
+        <%= hidden_field_tag "letters[]", flip_letter.letter.upcase %>
+        <div class="flip-letter col col-md-<%= col_w %>">
+          <div class="card">
+            <div class="card-header text-center">
+              <h5 class="card-title mb-0"><%= flip_letter.letter %></h5>
+            </div>
+            <div class="card-body text-center">
+              <table style="margin: 0 auto;">
+                <tbody>
+                  <% 1.upto(FlipLetter::ROWS_FOR_LETTER) do |row| %>
+                    <tr>
+                      <% 1.upto(FlipLetter::COLUMNS_FOR_LETTER) do |col| 
+                      %>
+                        <td class="letter-position-cell">
+                          <%= check_box_tag "#{flip_letter.letter}[#{index}]", 1, false, { class: "letter-position-checkbox", data: { 'bs-toggle': 'tooltip', 'bs-title': 'Check the boxes to make it look like the correct letter' } } %>
+                        </td>
+                      <% index += 1 %>
+                      <% end %>
+                    </tr>
+                  <% end # each row %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      <% end # each flip_letter %>
+    </div>
+    <div class="mt-3">
+      <%= submit_tag "Submit", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
+      <span class="m-2">&nbsp;</span>
+      <% if flash[:notice] %>
+        <span class="alert alert-success"><%= flash[:notice] %></span>
+      <% elsif flash[:alert] %>
+        <span class="alert alert-danger"><%= flash[:alert] %></span>
+      <% end %>
+    </div>
+  <% end # form %>
 </div>

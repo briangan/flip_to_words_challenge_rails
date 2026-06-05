@@ -18,9 +18,13 @@ class FlipLetterMap
       flip_letter
   end
 
+  def get_flip_letter(letter)
+    @map[letter.upcase]
+  end
+
   # @return <Array> An array of boolean values representing the positions to flip for the given letter.
   def [](letter)
-    @map[letter.upcase]&.positions || []
+    get_flip_letter(letter)&.positions || []
   end
 
   # @return <FlipLetterMap>
