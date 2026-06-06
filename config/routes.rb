@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   resources :flip_letters, only: [ :index ]
   post "/flip_to_words_challenge/verify", to: "flip_to_words_challenge#verify", as: "verify_flip_to_words_challenge"
 
+  # Test pages
+  get "/test_account_page", to: "home#test_account_page", as: "test_account_page"
+
   # Defines the root path route ("/")
   root "home#index"
 end

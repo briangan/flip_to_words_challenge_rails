@@ -1,0 +1,8 @@
+<h3>Test Account Page</h3>
+<p>Supposedly this page should only be acessible to human users after they have passed the Flip2WordsChallenge. 
+</p>
+<% if flash[:notice].present? %>
+  <div class="alert alert-success"><%= flash[:notice] %></div>
+<% elsif flash[:alert].present? %>
+  <div class="alert alert-danger"><%= flash[:alert] %></div>
+<% end %>

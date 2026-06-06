@@ -28,4 +28,8 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  flip_to_words_challenge:
+    must_pass_message: "You must pass the Flip to Words Challenge to access this page."
+    instructions: "Flip the checkboxes to show the ASCII form of the letters, to verify human interaction."
+    success_message: "Congratulations! You've successfully completed the Flip to Words Challenge."
+    failed_message: "Your choice of positions for at least one letter is incorrect. Please try again."
