@@ -1,6 +1,7 @@
 require "test_helper"
 
 class HomePageTest < ActionDispatch::IntegrationTest
+  include FlipLettersHelper
 
   test "Flip the letters and fail the challenge with incorrect positions" do
     initial_visit_to_see_challenge()
@@ -11,9 +12,9 @@ class HomePageTest < ActionDispatch::IntegrationTest
     # Simulate submitting the form with incorrect positions for the letters
     post verify_flip_to_words_challenge_path, params: {
       letters: letters,
-      letters[0] => { '0' => 1, '1' => 0, '2' => 0 },
-      letters[1] => { '0' => 0, '1' => 1, '2' => 0 },
-      letters[2] => { '0' => 0, '1' => 0, '2' => 1 }
+      letters[0] => { "0" => 1, "1" => 0, "2" => 0 },
+      letters[1] => { "0" => 0, "1" => 1, "2" => 0 },
+      letters[2] => { "0" => 0, "1" => 0, "2" => 1 }
     }
 
     follow_redirect!
@@ -22,17 +23,17 @@ class HomePageTest < ActionDispatch::IntegrationTest
     assert_select (".alert-danger"), text: /choice\s+of\s+positions.+is\s+incorrect/i
   end
 
-  test 'Flip the letters and pass the challenge with correct positions' do
+  test "Flip the letters and pass the challenge with correct positions" do
     initial_visit_to_see_challenge()
 
     flip_letters = find_flip_letters
     # Simulate submitting the form with correct positions for the letters
-    
+
     params = { letters: flip_letters.collect(&:letter) }
     flip_letters.each do |flip_letter|
-      expected_positions = flip_letter.positions.each_with_index.select{ |pos, index| pos == 1 }.map{ |pos, index| index }
+      expected_positions = flip_letter.positions.each_with_index.select { |pos, index| pos == 1 }.map { |pos, index| index }
       user_answers = {}
-      expected_positions.each{ |pos| user_answers[pos.to_s] = 1 }
+      expected_positions.each { |pos| user_answers[pos.to_s] = 1 }
       params[flip_letter.letter] = user_answers
     end
 
@@ -45,9 +46,23 @@ class HomePageTest < ActionDispatch::IntegrationTest
 
     # Check that a success message is displayed indicating the challenge was passed
     assert_select (".alert-success"), text: /successfully completed/i
+
+    # Visit again and should skip the challenge because already passed
+    get test_account_page_path
+    assert_response :success
+    assert_equal test_account_page_path, path
+    assert_equal "passed", session[:flip_to_words_challenge_status]
+
+    # Extra check whether it's localhost and allows Flip Letters Manager
+    if allowed_to_manage_flip_letters?
+      puts "----------- Able to manage flip letters, testing access to flip letters page -----------"
+      get flip_letters_path
+      assert_response :success
+      assert_equal flip_letters_path, path
+    end
   end
 
-  private 
+  private
 
   def initial_visit_to_see_challenge
     get root_path
@@ -61,7 +76,7 @@ class HomePageTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_select "#flip-to-words-challenge"
-    assert_not_equal 'passed', session[:flip_to_words_challenge_status]
+    assert_not_equal "passed", session[:flip_to_words_challenge_status]
     assert session[:return_url].present?, "Expected session[:return_url] to be set to the originally requested URL"
   end
 
@@ -82,5 +97,4 @@ class HomePageTest < ActionDispatch::IntegrationTest
     end
     flip_letters
   end
-
 end
