@@ -1,7 +1,7 @@
 require "test_helper"
 
 class HomePageTest < ActionDispatch::IntegrationTest
-  include FlipLettersHelper
+  include FlipToWords::FlipLettersHelper
 
   test "Flip the letters and fail the challenge with incorrect positions" do
     initial_visit_to_see_challenge()
@@ -71,6 +71,8 @@ class HomePageTest < ActionDispatch::IntegrationTest
     assert_select "#flip-to-words-challenge .flip-letter", minimum: 1
     assert_select "#flip-to-words-challenge input[name='letters[]']", minimum: 1
 
+    # TODO: check if enough checkboxes to match width * height for each letter.
+
     get test_account_page_path
     assert_response :redirect
     follow_redirect!
@@ -87,7 +89,7 @@ class HomePageTest < ActionDispatch::IntegrationTest
     assert_not_empty hidden_inputs, "Expected to find hidden inputs for letters to flip"
 
     # Make sure the letters actually exists in the FlipLetterMap for the test to be meaningful
-    flip_letter_map = FlipLetterMap.load_from_file
+    flip_letter_map = FlipToWords::FlipLetterMap.load_from_file
     flip_letters = []
     hidden_inputs.each do |input|
       letter = input["value"]

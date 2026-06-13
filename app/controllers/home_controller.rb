@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  include FlipLettersHelper
+  include FlipToWords::FlipLettersHelper
   helper_method :allowed_to_manage_flip_letters?
 
   # Don't know why the option below, only:[:index] doesn't work, but this does yet this would be messy if many methods.
@@ -7,7 +7,8 @@ class HomeController < ApplicationController
 
   # Home page that shows the Flip to Words Challenge if the user has not passed it yet.
   def index
-    session[:flip_to_words_challenge_status] = nil if Rails.env.development? # reset challenge status on page refresh in development for easier testing
+    logger.debug "HomeController#index - flip_to_words_challenge_status: #{flip_to_words_challenge_status}"
+    # session[:flip_to_words_challenge_status] = nil if Rails.env.development? # reset challenge status on page refresh in development for easier testing
     render template: "home/index"
   end
 

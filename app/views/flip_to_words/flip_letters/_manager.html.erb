@@ -1,4 +1,7 @@
-<h2 class="mt-3">Letters to Flip Manager</h2>
+<h2 class="mt-3">
+  <a href="/" class="text-decoration-none text-secondary">Home</a> / 
+  Letters to Flip Manager
+</h2>
 <div class="row border border-secondary">
   <div class="col-md-1 float-end border-end bg-secondary py-2">
     <h5 class="text-white">Letters</h5>
@@ -11,7 +14,7 @@
     <div class="border-bottom border-secondary mb-2">
       <label class="form-label">Checkbox meanings: </label>
     </div>
-    <% FlipLetter::POSITION_VALUE_MEANINGS.each do |value, meaning| %>
+    <% FlipToWords::FlipLetter::POSITION_VALUE_MEANINGS.each do |value, meaning| %>
       <div class="mb-2 vertical-center">
         <%= check_box_tag "positions[#{value}]", value, true, { class: "letter-position-checkbox", title: meaning, data: { 'bs-toggle': 'tooltip', 'bs-title': meaning } } %> <%= meaning %>
       </div>

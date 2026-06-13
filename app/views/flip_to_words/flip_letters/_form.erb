@@ -3,7 +3,7 @@
   # - positions: an array of booleans indicating which positions are chosen for the letter
   positions = [] unless defined?(positions) && positions.is_a?(Array)
   letter ||= ''
-  multivalues = FlipLetter::POSITION_VALUES.map{ |pos| pos.to_s }
+  multivalues = FlipToWords::FlipLetter::POSITION_VALUES.map{ |pos| pos.to_s }
   multivalues_string = multivalues.join(",")
 -%>
 <%= form_tag update_flip_letter_path, method: :post, remote: true, id: "letter_form", name: "letter_form" do %>
@@ -15,10 +15,10 @@
     <div class="card-body text-center">
       <table style="margin: 0 auto;">
         <tbody>
-          <% 1.upto(FlipLetter::ROWS_FOR_LETTER) do |row| %>
+          <% 1.upto(FlipToWords::FlipLetter::ROWS_FOR_LETTER) do |row| %>
             <tr>
-              <% 1.upto(FlipLetter::COLUMNS_FOR_LETTER) do |col| 
-                pos = (row - 1) * FlipLetter::COLUMNS_FOR_LETTER + (col - 1)
+              <% 1.upto(FlipToWords::FlipLetter::COLUMNS_FOR_LETTER) do |col| 
+                pos = (row - 1) * FlipToWords::FlipLetter::COLUMNS_FOR_LETTER + (col - 1)
                 init_color = positions[pos] ? "f2w-#{positions[pos] }" : ""
               %>
                 <td class="letter-position-cell">

@@ -30,6 +30,7 @@
           flip_letters = generate_random_combo_of_flip_letters
           # col_w = (12 / flip_letters.size.to_f).ceil 
           flip_letters.each_with_index do |flip_letter, fp_index| 
+            checkbox_index = 0
           %>
             <%= hidden_field_tag "letters[]", flip_letter.letter.upcase %>
             <div class="flip-letter col col-md-auto">
@@ -40,12 +41,13 @@
                 <div class="card-body text-center">
                   <table style="margin: 0 auto;">
                     <tbody>
-                      <% 1.upto(FlipLetter::ROWS_FOR_LETTER) do |row| %>
+                      <% 1.upto(FlipToWords::FlipLetter::ROWS_FOR_LETTER) do |row| %>
                         <tr>
-                          <% 1.upto(FlipLetter::COLUMNS_FOR_LETTER) do |col| 
+                          <% 1.upto(FlipToWords::FlipLetter::COLUMNS_FOR_LETTER) do |col| 
                           %>
                             <td class="letter-position-cell">
-                              <%= check_box_tag "#{flip_letter.letter}[#{fp_index}]", 1, false, { class: "letter-position-checkbox", data: { 'bs-toggle': 'tooltip', 'bs-title': 'Check the boxes to make it look like the correct letter' } } %>
+                              <%= check_box_tag "#{flip_letter.letter}[#{checkbox_index}]", 1, false, { class: "letter-position-checkbox", data: { 'bs-toggle': 'tooltip', 'bs-title': 'Check the boxes to make it look like the correct letter' } } %>
+                              <% checkbox_index += 1 %>
                             </td>
                           <% end %>
                         </tr>

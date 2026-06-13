@@ -9,11 +9,12 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  match "/flip_letters/:letter", to: "flip_letters#show", via: [ :get ], as: "flip_letter"
-  match "/flip_letters/:letter", to: "flip_letters#destroy", via: [ :delete ], as: "delete_flip_letter"
-  match "/flip_letters", to: "flip_letters#update", via: [ :put, :patch, :post ], as: "update_flip_letter" # allows new to create also
-  resources :flip_letters, only: [ :index ]
-  post "/flip_to_words_challenge/verify", to: "flip_to_words_challenge#verify", as: "verify_flip_to_words_challenge"
+  match "/flip_letters/:letter", to: "flip_to_words/flip_letters#show", via: [ :get ], as: "flip_letter"
+  match "/flip_letters/:letter", to: "flip_to_words/flip_letters#destroy", via: [ :delete ], as: "delete_flip_letter"
+  match "/flip_letters", to: "flip_to_words/flip_letters#update", via: [ :put, :patch, :post ], as: "update_flip_letter" # allows new to create also
+  get "/flip_letters", to: "flip_to_words/flip_letters#index", as: "flip_letters"
+
+  post "/flip_to_words_challenge/verify", to: "flip_to_words/challenge#verify", as: "verify_flip_to_words_challenge"
 
   # Test pages
   get "/test_account_page", to: "home#test_account_page", as: "test_account_page"
