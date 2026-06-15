@@ -42,6 +42,15 @@ module FlipToWords
       end
     end
 
+    # For testing purpose, so blocked off in production environment.
+    def reset_challenge_status
+      unless Rails.env.production?
+        session[:flip_to_words_challenge_status] = nil
+        flash[:notice] = t("flip_to_words_challenge.reset_challenge_status") || "Challenge status has been reset."
+      end
+      redirect_to page_with_challenge_form
+    end
+
     private
 
     # One requirement before validating of the letter's positions is that its mapping exists from source, FlipLetterMap. If the letter doesn't exist in the map, we can skip validation and consider it as incorrect.

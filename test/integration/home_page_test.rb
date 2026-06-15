@@ -27,6 +27,14 @@ class HomePageTest < ActionDispatch::IntegrationTest
     initial_visit_to_see_challenge()
 
     flip_letters = find_flip_letters
+
+    # check if enough checkboxes to match width * height for each letter.
+    flip_letters.each do |flip_letter|
+      0.upto(FlipToWords::FlipLetter::TOTAL_POSITIONS_FOR_LETTER - 1) do |cb_index|
+        assert_select "input[name='#{flip_letter.letter}[#{cb_index}]']", count: 1, message: "Expected to find a hidden checkbox input for letter '#{flip_letter.letter}' at position index #{cb_index}"
+      end
+    end
+
     # Simulate submitting the form with correct positions for the letters
 
     params = { letters: flip_letters.collect(&:letter) }
@@ -70,8 +78,6 @@ class HomePageTest < ActionDispatch::IntegrationTest
     assert_select "#flip-to-words-challenge"
     assert_select "#flip-to-words-challenge .flip-letter", minimum: 1
     assert_select "#flip-to-words-challenge input[name='letters[]']", minimum: 1
-
-    # TODO: check if enough checkboxes to match width * height for each letter.
 
     get test_account_page_path
     assert_response :redirect

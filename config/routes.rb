@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "/flip_letters", to: "flip_to_words/flip_letters#index", as: "flip_letters"
 
   post "/flip_to_words_challenge/verify", to: "flip_to_words/challenge#verify", as: "verify_flip_to_words_challenge"
+  match "/flip_to_words_challenge/reset", to: "flip_to_words/challenge#reset_challenge_status", via: [ :get, :put, :post ], as: "reset_flip_to_words_challenge"
 
   # Test pages
   get "/test_account_page", to: "home#test_account_page", as: "test_account_page"

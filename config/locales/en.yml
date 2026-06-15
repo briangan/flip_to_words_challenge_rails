@@ -34,3 +34,4 @@ en:
     avoid_curved_corners_message: "Avoid checkboxes at curved corners."
     success_message: "Congratulations! You've successfully completed the Flip to Words Challenge."
     failed_message: "Your choice of positions for at least one letter is incorrect. Please try again."
+    reset_challenge_status: "Challenge status has been reset. Required to complete the challenge again."

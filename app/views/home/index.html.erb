@@ -1,5 +1,8 @@
 <% if allowed_to_manage_flip_letters? %>
   <div class="float-end mt-2">
+    <% unless Rails.env.production? || !flip_to_words_challenge_passed? %>
+      <%= link_to "Reset Challenge Status", reset_flip_to_words_challenge_path, class: "btn btn-info" %> &nbsp;&nbsp;
+    <% end %>
     <%= link_to "Manage Flip Letters", flip_letters_path, class: "btn btn-primary" %>
   </div>
   <div class="clearfix"></div>
