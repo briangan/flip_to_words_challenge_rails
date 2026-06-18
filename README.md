@@ -25,14 +25,32 @@ Things you may want to cover:
 * Structure of Important Files
 ```
 app
+  |
+  + assets
+       + images
+           | flip_letter_demo.png - screenshot of how to have checkboxes represent the sample letters
+       + stylesheets
+           | application.css - the section "FlyToWords component styles" has CSS rules
   | 
+  + controllers
+  |----+ flip_to_words
+       |---- challenge_controller.rb => includes the verification methods to review the user answers
+  |
+  + helpers
+  |----+ flip_to_words
+       |---- challenge_helper.rb => includes the helper methods to provide the status of challenge
+  |
+  + models
+  |----+ flip_to_words
+       |---- flip_letter_map.rb => the pack of multiple FlipLetter instances
+       |---- flip_letter.rb => container of the letter and its position mapping of the strokes
   + views 
-    | _flip_to_words_challenge_convas.html.erb => partial to include as the challenging gate
-  controllers
-    | flip_to_words_challenge_controller.rb => includes the verification methods to review the user answers
-  helpers
-    | flip_to_words_challenge_helper.rb => includes the helper methods to provide the status of challenge
+  |----+ flip_to_words
+       |---- _challenge_canvas.html.erb => partial to include as the challenging gate
+   
 ```
+
+# Other Requirements Requirements
 
 * How to run the test suite
 

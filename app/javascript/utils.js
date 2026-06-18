@@ -1,4 +1,4 @@
-// Utility functions for the application
+// Utility functions for the admin FlyLetter Manager, but not needed for FlyToWords component itself
 
 export function resetPositionCheckboxes(parentSelector) {
   var selector = parentSelector ? `${parentSelector} .letter-position-checkbox` : '.letter-position-checkbox';
