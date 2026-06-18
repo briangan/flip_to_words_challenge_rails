@@ -47,7 +47,10 @@ app
   + views 
   |----+ flip_to_words
        |---- _challenge_canvas.html.erb => partial to include as the challenging gate
-   
+  |
+config
+  + locales
+      | en.yml - has a group "flip_to_words_challenge" to customize wordings of messages; even if not copied over to new project's diction, default messages are used.
 ```
 
 # Other Requirements Requirements

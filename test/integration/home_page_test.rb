@@ -75,15 +75,15 @@ class HomePageTest < ActionDispatch::IntegrationTest
   def initial_visit_to_see_challenge
     get root_path
     assert_response :success
-    assert_select "#flip-to-words-challenge"
-    assert_select "#flip-to-words-challenge .flip-letter", minimum: 1
-    assert_select "#flip-to-words-challenge input[name='letters[]']", minimum: 1
+    assert_select "#flip_to_words_challenge"
+    assert_select "#flip_to_words_challenge .flip-letter", minimum: 1
+    assert_select "#flip_to_words_challenge input[name='letters[]']", minimum: 1
 
     get test_account_page_path
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_select "#flip-to-words-challenge"
+    assert_select "#flip_to_words_challenge"
     assert_not_equal "passed", session[:flip_to_words_challenge_status]
     assert session[:return_url].present?, "Expected session[:return_url] to be set to the originally requested URL"
   end
@@ -91,7 +91,7 @@ class HomePageTest < ActionDispatch::IntegrationTest
   # @return <Array of FlipLetter>
   def find_flip_letters
     # This method can be implemented to parse the HTML response and find the letters and their corresponding positions to flip for testing purposes.
-    hidden_inputs = css_select("#flip-to-words-challenge input[name='letters[]']")
+    hidden_inputs = css_select("#flip_to_words_challenge input[name='letters[]']")
     assert_not_empty hidden_inputs, "Expected to find hidden inputs for letters to flip"
 
     # Make sure the letters actually exists in the FlipLetterMap for the test to be meaningful
