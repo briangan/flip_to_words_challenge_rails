@@ -13,8 +13,22 @@ Code Complications:
 * Javascript actions on each dot call different methods to flip the colors
 * Javascript flip functions have encrypted logics are more complicated than simple rotation of colors
 
+# Installation
 
-# Ruby on Rails Requirements
+## Initial Merge Into Existing Rails Project
+Copy the structure of files in following Ruby on Rails Requirements section to your Rails project.
+
+## Generation of Environment Variables
+Since the rubygem 'dotenv' is used, environments variables local for the running stance of this RoR app 
+can be set with file(s) /.env and /.env.test.
+
+For encryption security key that encrypts certain data, for example, challenge answer's parameters.
+The generation of that key can be done with command:
+```
+ruby -e "require 'securerandom'; puts SecureRandom.hex(32)"
+```
+
+## Ruby on Rails Requirements
 
 Things you may want to cover:
 
@@ -53,8 +67,35 @@ config
       | en.yml - has a group "flip_to_words_challenge" to customize wordings of messages; even if not copied over to new project's diction, default messages are used.
 ```
 
-# Other Requirements Requirements
+## Other Requirements Requirements
 
 * How to run the test suite
 
 * Deployment instructions
+
+
+# Flow of Development Using AI Coding Agents
+
+## Service and Agents In Use
+CoPilot > Claude Sonnet 4.5, GPT-Codex 5.3
+
+## Prompts and Results
+---------------------------------
+Write me another method to update the letters list.
+Result:
+  Simple question.  Able to add method to controller, update view script, and routes.
+
+---------------------------------
+Generate a secret key
+Result:
+  Nice that it uses Ruby's internal random key generator.  Could've used Unix/Linux system script.
+
+---------------------------------
+Create some algorithm that encrypts the parameter names like "P[0]" so they would become unrecognizable.  Then upon reception of the request, the algorithm can consistently decrypt the encrypted parameter names.
+
+Result:
+  Generated encryptor class; modified controller methods to encrypt and decrypt parameters; 
+  modified the form checkboxes to use encrypted field names & ids.
+  But the decryption fails to produce the correct original paramters.  Might be incorrect encryption.
+
+  

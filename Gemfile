@@ -29,6 +29,7 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 gem 'csv'
+gem 'dotenv', groups: [:development, :test]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
