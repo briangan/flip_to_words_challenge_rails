@@ -9,6 +9,14 @@ module FlipToWords
       session[:flip_to_words_challenge_status] || "not_attempted"
     end
 
+    ##
+    # Encrypts a parameter name to make it unrecognizable
+    # @param param_name [String] The parameter name to encrypt
+    # @return [String] The encrypted parameter name
+    def encrypt_param_name(param_name)
+      FlipToWords::ParameterEncryptor.encrypt_param_for_view(param_name)
+    end
+
     def flip_to_words_challenge_passed?
       flip_to_words_challenge_status == "passed"
     end

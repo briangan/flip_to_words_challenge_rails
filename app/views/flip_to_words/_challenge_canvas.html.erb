@@ -31,8 +31,10 @@
           # col_w = (12 / flip_letters.size.to_f).ceil 
           flip_letters.each_with_index do |flip_letter, fp_index| 
             checkbox_index = 0
+            # Store encrypted parameter names for use in the form
+            encrypted_letter_param = encrypt_param_name(flip_letter.letter.upcase)
           %>
-            <%= hidden_field_tag "letters[]", flip_letter.letter.upcase %>
+            <%= hidden_field_tag encrypt_param_name("letters[]"), flip_letter.letter.upcase %>
             <div class="flip-letter col col-md-auto">
               <div class="card">
                 <div class="card-header text-bg-dark text-center">
@@ -44,9 +46,10 @@
                       <% 1.upto(FlipToWords::FlipLetter::ROWS_FOR_LETTER) do |row| %>
                         <tr>
                           <% 1.upto(FlipToWords::FlipLetter::COLUMNS_FOR_LETTER) do |col| 
+                            encrypted_checkbox_name = encrypt_param_name("#{flip_letter.letter}[#{checkbox_index}]")
                           %>
                             <td class="letter-position-cell">
-                              <%= check_box_tag "#{flip_letter.letter}[#{checkbox_index}]", 1, false, { class: "letter-position-checkbox", data: { 'bs-toggle': 'tooltip', 'bs-title': 'Check the boxes to make it look like the correct letter' } } %>
+                              <%= check_box_tag encrypted_checkbox_name, 1, false, { class: "letter-position-checkbox", data: { 'bs-toggle': 'tooltip', 'bs-title': 'Check the boxes to make it look like the correct letter' } } %>
                               <% checkbox_index += 1 %>
                             </td>
                           <% end %>

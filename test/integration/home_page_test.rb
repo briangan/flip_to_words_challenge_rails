@@ -30,8 +30,9 @@ class HomePageTest < ActionDispatch::IntegrationTest
 
     # check if enough checkboxes to match width * height for each letter.
     flip_letters.each do |flip_letter|
+      encrypted_letter = FlipToWords::ParameterEncryptor.encrypt_param_for_view(flip_letter.letter)
       0.upto(FlipToWords::FlipLetter::TOTAL_POSITIONS_FOR_LETTER - 1) do |cb_index|
-        assert_select "input[name='#{flip_letter.letter}[#{cb_index}]']", count: 1, message: "Expected to find a hidden checkbox input for letter '#{flip_letter.letter}' at position index #{cb_index}"
+        assert_select "input[name='#{encrypted_letter}[#{cb_index}]']", count: 1, message: "Expected to find a hidden checkbox input for letter '#{flip_letter.letter} (enc #{encrypted_letter})' at position index #{cb_index}"
       end
     end
 
@@ -77,7 +78,7 @@ class HomePageTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#flip_to_words_challenge"
     assert_select "#flip_to_words_challenge .flip-letter", minimum: 1
-    assert_select "#flip_to_words_challenge input[name='letters[]']", minimum: 1
+    assert_select "#flip_to_words_challenge input[name='#{letters_encrypted}']", minimum: 1
 
     get test_account_page_path
     assert_response :redirect
@@ -88,10 +89,15 @@ class HomePageTest < ActionDispatch::IntegrationTest
     assert session[:return_url].present?, "Expected session[:return_url] to be set to the originally requested URL"
   end
 
+
+  def letters_encrypted
+    FlipToWords::ParameterEncryptor.encrypt_param_for_view("letters[]")
+  end
+
   # @return <Array of FlipLetter>
   def find_flip_letters
     # This method can be implemented to parse the HTML response and find the letters and their corresponding positions to flip for testing purposes.
-    hidden_inputs = css_select("#flip_to_words_challenge input[name='letters[]']")
+    hidden_inputs = css_select("#flip_to_words_challenge input[name='#{letters_encrypted}']")
     assert_not_empty hidden_inputs, "Expected to find hidden inputs for letters to flip"
 
     # Make sure the letters actually exists in the FlipLetterMap for the test to be meaningful

@@ -19,9 +19,14 @@ module FlipToWords
     #     For example, "A" => { '0' => 1, '1' => 0, '2' => 1 }, "B" => { '0' => 0, '1' => 1, '2' => 0 }, etc.
     def verify
       full_params = params.permit!.to_h
-      letters = full_params.delete(:letters) || []
-      @verification_results = verify_user_answers(letters, full_params)
+      
+      # Decrypt all remaining parameters using the letters we found
+      decrypted_params = FlipToWords::ParameterEncryptor.decrypt_params(full_params)
+      letters = decrypted_params.delete('letters') || []
+      
+      @verification_results = verify_user_answers(letters, decrypted_params)
       logger.info "Verification results: #{@verification_results.inspect}"
+      
       if @verification_results.size > 0 && @verification_results.values.all?
         session[:flip_to_words_challenge_status] = "passed"
         flash[:notice] =  t("flip_to_words_challenge.success_message") || "Congratulations! You've successfully completed the Flip to Words Challenge."

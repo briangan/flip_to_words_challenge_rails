@@ -94,8 +94,20 @@ Result:
 Create some algorithm that encrypts the parameter names like "P[0]" so they would become unrecognizable.  Then upon reception of the request, the algorithm can consistently decrypt the encrypted parameter names.
 
 Result:
-  Generated encryptor class; modified controller methods to encrypt and decrypt parameters; 
-  modified the form checkboxes to use encrypted field names & ids.
-  But the decryption fails to produce the correct original paramters.  Might be incorrect encryption.
+  Generated encryptor class; modified controller methods to encrypt and decrypt parameters; modified the form checkboxes to use encrypted field names & ids.
+  In fact, too complicated or repeated methods that fail with inconsistency, so tests fail to encrypt then decrypt.
+  The actual reason is that AI chose HMAC-SHA256, the one-way encoding of string, irreversible and totally wrong.
+
+----------------------------------
+Create an algorithm for reversable encryption: encrypt and later then decrypt.
+
+Result:
+  AI suggesteed AES algorithm.  It proceeds to check for already generated secure key in environment variables,
+  which I have in /.env file
+  In its concatenation of final encrypted string, the first segment of the string is a randomly generated code:
+    iv = cipher.random_iv
+    which would fail the consistency of encryption with the same input and same output value.
+
+After redemption of inconsistent encryption, AI could fix the settings of encryption, and provide valid reversible encryption.
 
   
