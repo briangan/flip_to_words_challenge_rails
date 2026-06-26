@@ -9,10 +9,10 @@ Javascript codes are renamed and shuffled, so AI agents cannot easily understand
 think of breaking techniques.
 
 Code Complications:
-[x] HTML field names are encrypted so a peek at inner page source wouldn't leak
-[ ] Considerable: use CSS to allow different placements of checkboxes than the order of rendered HTML tags
-[ ] Considerable: split the letters into a sequence of individual follow-up requests, instead of rendering all at once
-[ ] Considerable: Javascript flip functions have encrypted logics are more complicated than simple rotation of colors
+* [x] HTML field names are encrypted so a peek at inner page source wouldn't leak
+* [ ] Considerable: use CSS to allow different placements of checkboxes than the order of rendered HTML tags
+* [ ] Considerable: split the letters into a sequence of individual follow-up requests, instead of rendering all at once
+* [ ] Considerable: Javascript flip functions have encrypted logics are more complicated than simple rotation of colors
 
 # Installation
 
