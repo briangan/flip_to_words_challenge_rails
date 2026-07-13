@@ -32,9 +32,9 @@
           flip_letters.each_with_index do |flip_letter, fp_index| 
             checkbox_index = 0
             # Store encrypted parameter names for use in the form
-            encrypted_letter_param = encrypt_param_name(flip_letter.letter.upcase)
+            encrypted_letter_param = evaluate_param_name(flip_letter.letter.upcase)
           %>
-            <%= hidden_field_tag encrypt_param_name("letters[]"), flip_letter.letter.upcase %>
+            <%= hidden_field_tag evaluate_param_name("letters[]"), flip_letter.letter.upcase %>
             <div class="flip-letter col col-md-auto">
               <div class="card">
                 <div class="card-header text-bg-dark text-center">
@@ -46,7 +46,7 @@
                       <% 1.upto(FlipToWords::FlipLetter::ROWS_FOR_LETTER) do |row| %>
                         <tr>
                           <% 1.upto(FlipToWords::FlipLetter::COLUMNS_FOR_LETTER) do |col| 
-                            encrypted_checkbox_name = encrypt_param_name("#{flip_letter.letter}[#{checkbox_index}]")
+                            encrypted_checkbox_name = evaluate_param_name("#{flip_letter.letter}[#{checkbox_index}]")
                           %>
                             <td class="letter-position-cell">
                               <%= check_box_tag encrypted_checkbox_name, 1, false, { class: "letter-position-checkbox", data: { 'bs-toggle': 'tooltip', 'bs-title': 'Check the boxes to make it look like the correct letter' } } %>
@@ -71,6 +71,14 @@
             <span class="alert alert-danger"><%= flash[:alert] %></span>
           <% end %>
         </div>
+        <div class="flip-letter mt-3">
+          <div class="card" style="display: grid; grid-template-columns: repeat(<%= FlipToWords::FlipLetter::COLUMNS_FOR_LETTER %>, 1fr); gap: 5px;">
+            <% 1.upto(FlipToWords::FlipLetter::ROWS_FOR_LETTER) do |row| %>
+              <% 1.upto(FlipToWords::FlipLetter::COLUMNS_FOR_LETTER) do |col| %>
+                <span class="letter-position-label" style=""><%= "#{row},#{col}" %></span>
+              <% end %>
+            <% end %>
+          </div>
       </div>
     </div>
   <% end # form %>

@@ -9,6 +9,19 @@ module FlipToWords
       session[:flip_to_words_challenge_status] || "not_attempted"
     end
 
+    # Can be used for testing purposes to controll encrypting parameter names or not.
+    def should_encrypt_param_name?
+      Rails.env.production? || Rails.env.staging?
+    end
+
+    ##
+    # Conditionally checks if parameter name is required to be encrypted or not,
+    # and returns the evaluated parameter name for view.
+    def evaluate_param_name(param_name)
+      should_encrypt_param_name? ?
+        FlipToWords::ParameterEncryptor.evaluate_param_for_view(param_name) : param_name
+    end
+
     ##
     # Encrypts a parameter name to make it unrecognizable
     # @param param_name [String] The parameter name to encrypt
